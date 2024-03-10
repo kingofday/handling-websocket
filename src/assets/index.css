@@ -1,0 +1,20 @@
+main {
+    padding: 1.875rem;
+}
+
+.tbl-wrapper table {
+    width: 50%;
+    border-collapse: collapse;
+}
+
+.tbl-wrapper table thead {
+    background-color: #eee;
+}
+
+.tbl-wrapper table thead td {
+    padding: .25rem 0;
+    font-weight: 700;
+}
+.tbl-wrapper table tbody td{
+    padding: .25rem 0;
+}
