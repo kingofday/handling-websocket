@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import LiveContext from "../context/LiveContext";
 import { PushType } from "../models";
+//=== this is the custom hook for easily handle sub unsub of context
 const useGetLiveData = (pushType: PushType, id: string, initValue: number) => {
     const [value, updater] = useState<number>(initValue);
     const ctx = useContext(LiveContext);

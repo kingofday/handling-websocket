@@ -4,13 +4,13 @@ import Price from './components/Price';
 import Count from './components/Count';
 
 function App() {
-  //for simplicity didn't include api call for data
+  //=== this is array of data that holds table data and can be fetched from api call
   const [data, setData] = useState([
     {
       id: 1,
       name: "Item 1",
-      price: 1000,
-      count: 30
+      price: 1000,//will be updated
+      count: 30//will be updated
     },
     {
       id: 2,
@@ -32,7 +32,10 @@ function App() {
     }
   ]);
   useEffect(() => {
-    //=== mocking receive push
+    //=== this can be some handler for web socket data
+    //=== as you see every time it receive data
+    //=== state will be updated and because of that whole table will be rerendered instead of required cells,
+    //=== so its not a good approach
     const handleWebSocketData = (data: any) => {
       setData(s => [...s.map(d => ({
         ...d,
@@ -40,12 +43,14 @@ function App() {
         price: data.id === d.id ? data.price : d.price,
       }))]);
     }
-    //listener for data
+    //===remaining of code for defining listener
     //...
     return () => {
-      //cleaner function
+      //===cleaner function
     }
   }, [])
+  //=== in our jsx we have a table thta needs to be updated
+  //=== now we wrap the app compoennt with our context as below
   return (
     <LiveContextPrvider>
       <main>
