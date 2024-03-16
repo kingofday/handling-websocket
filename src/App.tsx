@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import LiveContextPrvider from './context/LiveProvider';
+import Price from './components/Price';
+import Count from './components/Count';
 
 function App() {
   //for simplicity didn't include api call for data
@@ -31,11 +33,17 @@ function App() {
   ]);
   useEffect(() => {
     //=== mocking receive push
-    const handleWebSocketData = () => {
-
+    const handleWebSocketData = (data: any) => {
+      setData(s => [...s.map(d => ({
+        ...d,
+        count: data.id === d.id ? data.count : d.count,
+        price: data.id === d.id ? data.price : d.price,
+      }))]);
     }
+    //listener for data
+    //...
     return () => {
-
+      //cleaner function
     }
   }, [])
   return (
@@ -56,8 +64,8 @@ function App() {
               {data.map((d: any, idx: number) => <tr key={d.id}>
                 <td>{idx + 1}</td>
                 <td>{d.name}</td>
-                <td>{d.price}</td>
-                <td>{d.count}</td>
+                <td><Price id={d.id} value={d.price}/></td>
+                <td><Count id={d.id} value={d.count}/></td>
               </tr>)}
             </tbody>
           </table>

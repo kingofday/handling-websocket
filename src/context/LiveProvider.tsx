@@ -1,6 +1,6 @@
 import { Dispatch, ReactNode, SetStateAction, useCallback, useEffect } from "react";
-import LiveContext from "./liveContext";
 import { PushType } from "../models";
+import LiveContext from "./LiveContext";
 
 const LiveContextPrvider = ({ children }: { children: ReactNode }) => {
     // {
@@ -22,22 +22,22 @@ const LiveContextPrvider = ({ children }: { children: ReactNode }) => {
         const handleReceiveWebPriceSocket = () => {
             //consider this values received from websocket
             setInterval(() => {
-                const price = Math.random() * 1000 + 1000;
+                const price = (Math.random() * 100 + 100).toFixed(1);//1000-2000
                 const typeSet = subscriers.get("price");
                 typeSet?.forEach(updater => {
-                    updater(price);
+                    updater(parseFloat(price));
                 })
             }, 3000)
         }
         const handleReceiveWebCountSocket = () => {
             //consider this values received from websocket
             setInterval(() => {
-                const count = Math.random() * 100 + 100;
+                const count = (Math.random() * 100 + 100).toFixed(1);
                 const typeSet = subscriers.get("count");
                 typeSet?.forEach(updater => {
-                    updater(count);
+                    updater(parseFloat(count));
                 })
-            }, 3000)
+            }, 2500)
         }
         //listen mock
         handleReceiveWebPriceSocket();
